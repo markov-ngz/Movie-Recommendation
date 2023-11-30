@@ -1,0 +1,86 @@
+{% extends 'imdb/base.html' %}
+{% block title %} {{movie.titre}} {% endblock %}
+{% block content %}
+<div class="mt-10  w-5/6  ">
+    <a href="/movies/{{movie.id_movie}}" class="text-center text-3xl font-semibold "> {{ movie.titre }}</a>
+    <div class="border-neutral-600 mt-10 flex">
+        <img src="{{ movie.img_url}}" alt="poster of the movie" class="w-1/3 rounded-xl">
+        <div class="ml-10  w-2/3">
+            <div class=" mt-5">
+                <h4 class="text-xl"> Genres : </h4>
+                <ul class="flex justify-between mt-10 w-3/4 pl-10">
+                {% for genre in movie.genres %}
+                    <li>
+                        <a href="/genres/{{genre.id}}" class=" mt-6 py-4 px-6 bg-amber-500 hover:bg-amber-700 rounded-xl">{{ genre.name }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class=" mt-10 ">
+                <h4> Date de sortie : </h4>
+                <div class="pl-10 mt-3">
+                    <p>{{ movie.year}}</p>
+                </div>
+            </div>
+            <div class=" mt-5">
+                <h4>Réalisateur :</h4>
+                <ul class="pl-10 mt-10">
+                {% for director in movie.directors %}
+                    <li>
+                        <a href="/directors/{{director.id}}" class=" mt-6 py-4 px-6 bg-emerald-300 hover:bg-emerald-500 rounded-xl">{{ director.name }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="flex justify-between w-3/4 mt-5">
+                <div class=" mt-5">
+                    <h4> Popularité : </h4>
+                    <p class="px-10">{{ movie.rating_count }}</p>
+                </div>
+                <div class="mt-5">
+                    <h4> Public visé : </h4>
+                    <p class="">{{ movie.rating_content }}</p>
+                </div>
+            </div>
+            <div class=" mt-5">
+                <h4> Acteurs :</h4>
+                <ul class="px-10 flex pl-10  mt-7">
+                {% for actor in movie.actors %}
+                    <li >
+                        <a href="/actors/{{actor.id}}" class="ml-4 mt-6 py-4 px-6 bg-emerald-300 hover:bg-emerald-500 rounded-xl">{{ actor.name }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="mt-10">
+        <h4 class="font-semibold"> Anecdote : </h4>
+        <p>{{ movie.anecdote}}</p>
+    </div>
+    <div class="mt-5">
+        <h4 class="font-semibold"> Description : </h4>
+        <p>{{ movie.desc_fr}}</p>
+    </div>
+    <div class="border-t-2 border-neutral-500 pt-10 mt-10 mb-10">
+        <h1 class=" text-3xl font-semibold"> Vous avez aimé ce film ? Vous aimeriez peut-être ... </h1>
+        <div class="flex">
+            {% for movie in movies_recom %}
+            <div class="border-amber-300 border-2 rounded-xl p-10 mt-10 ml-5 w-1/5 flex flex-col justify-between">
+                
+                <a href="/movies/{{movie.id_movie}}" class="w-full">
+                    <img src="{{ movie.img_url}}" alt="poster of the movie rounded-xl" class="rounded-xl">
+                </a>
+                <div class="flex justify-center">
+                    <a href="/movies/{{movie.id_movie}}" class="text-center mt-5 font-bold mt-6 py-4 px-6 bg-amber-500 hover:bg-amber-700 rounded-xl"> {{ movie.titre }}</a>
+                </div>
+                <div class="flex mt-5 justify-center">
+                    <p class="w-2/3">Recommendé à :</p>
+                    <p class="ml-5"> {{ movie.recommendation_rate}} (%)</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

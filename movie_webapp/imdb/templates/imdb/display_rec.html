@@ -1,0 +1,58 @@
+{% extends 'imdb/base.html' %}
+{% block title %} Results {% endblock %}
+{% block content %}
+<div class="p-6 flex flex-col items-center w-5/6">
+    <a href="/movies/{{movie_form.id_movie}}" class="text-3xl"> {{ movie_form }} </a>
+    <div class="flex">
+        {% for movie in movies %}
+        <div class="border-amber-300 border-2 rounded-xl p-10 mt-10 ml-5 w-1/5 flex flex-col justify-between">
+            
+            <a href="/movies/{{movie.id_movie}}"  class="w-full">
+                <img src="{{ movie.img_url}}" alt="poster of the movie rounded-xl" class=" rounded-xl">
+            </a>
+            <div class="justify-end">
+                <div class="flex justify-center">
+                    <a href="/movies/{{movie.id_movie}}" class="text-center mt-5 font-bold mt-6 py-4 px-6 bg-amber-500 hover:bg-amber-700 rounded-xl"> {{ movie.titre }}</a>
+                </div>
+                <div class="flex mt-5 justify-center">
+                    <p class="">Recommendé à :</p>
+                    <p class="ml-5"> {{ movie.recommendation_rate}} (%)</p>
+                </div>
+            </div>
+            <!-- <div>
+                
+                {% for genre in movie.genres %}
+                
+                <div>
+                    <a href="/genres/{{genre.id}}" class="mt-6 py-4 px-6 bg-amber-500 hover:bg-amber-700 rounded-xl">{{ genre.name }}</a>
+                </div>
+                {% endfor %}
+            </div>  -->
+            <!--
+            <div>
+                
+                {% for actor in movie.actors %}
+                
+                <div>
+                    <a href="/actors/{{actor.id}}">{{ actor.name }}</a>
+                </div>
+                {% endfor %}
+            </div>
+            <div>
+                
+                {% for director in movie.directors %}
+                
+                <div>
+                    <a href="/directors/{{director.id}}">{{ director.name }}</a>
+                </div>
+                {% endfor %}
+            </div> -->
+        </div>
+        {% endfor %}
+
+
+    </div>
+    
+    
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'imdb/base.html' %}
+{% load static %}
+{% block title %} {{ director }}{% endblock %}
+{% block content %}
+<div class="p-6 flex flex-col items-center ">
+    <div class="w-3/4">
+        <a href="/movies/{{director.id}}" class="text-center text-3xl font-semibold "> {{ director }}</a>
+        <div class="flex">
+            <div class="w-1/2 p-10">
+                <img src="{% static 'imdb/images/user.png' %}" alt="" class="p-10">
+                <h2 class="mt-10"> Informations personnelles : </h2>
+
+            </div>
+            <ul class="w-1/2 wrapper-2">
+            {% for movie in director.movies %}
+                <li class="mt-6 py-4 px-6 bg-neutral-200  rounded-xl">
+                    <a href="/movies/{{movie.id_movie}}" class="mt-2 text-center"> 
+                        <img src="{{ movie.img_url}}" alt="poster of the movie" class="rounded-xl">
+                    </a>
+                    <div class="flex flex-col justify-center">
+                        <a href="/movies/{{movie.id_movie}}" class="mt-2 text-center font-semibold"> {{ movie.titre }}</a> 
+                        <p class="text-center mt-2">({{movie.year}})</p>
+                    </div>
+                    
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'imdb/base.html' %}
+{% block title %} {{ genre }}{% endblock %}
+{% block content %}
+<div class="p-6 flex flex-col items-center ">
+    <div class="w-3/4">
+        <a href="/movies/{{director.id}}" class="text-center text-3xl font-semibold "> {{ genre }}</a>
+        <div class="">
+            <ul class="wrapper-4">
+            {% for movie in movies %}
+                <li class="mt-6 py-4 px-6 bg-neutral-200  rounded-xl ">
+                    <a href="/movies/{{movie.id_movie}}" class="mt-2 text-center"> 
+                        <img src="{{ movie.img_url}}" alt="poster of the movie" class="rounded-xl">
+                    </a>
+                    <div class="flex flex-col justify-center">
+                        <a href="/movies/{{movie.id_movie}}" class="mt-2 text-center font-semibold"> {{ movie.titre }}</a> 
+                        <p class="text-center mt-2">({{movie.year}})</p>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

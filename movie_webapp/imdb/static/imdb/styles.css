@@ -1,0 +1,25 @@
+.TimesNR{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.emoji {
+    font-family: emoji;
+  }
+
+.fantasy {
+    font-family: fantasy;
+  }
+
+.wrapper-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(1px, auto);
+  }
+
+.wrapper-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }

@@ -1,0 +1,32 @@
+{% extends 'imdb/base.html' %}
+{% block title %}Recommendation{% endblock %}
+{% block content %}
+<div class="p-6 flex flex-col items-center ">
+    {% if notinlist %}
+        <div class=" flex justify-center w-full">
+            <div class=" mt-6 py-4 px-8 text-lg bg-red-600 hover:bg-red-700 rounded-xl text-white mb-10 "> 
+                Title not found !  
+            </div>
+        </div>
+    {% endif%}
+    <form action="" method="post" class="border-amber-300 border-2 p-10 rounded-xl">
+        {% csrf_token %}
+        <div class="space-y-4 ">
+            {{ form.as_p }}
+        </div>
+        {% if form.errors or form.non_field_errors %}
+            <div class="mb-3 p-6 bg-amber-100 rounded-xl">
+                {%for field in form %}
+                    {{ field.errors}}
+                {% endfor %}
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+    
+        <div class=" flex justify-center ">
+            <button class=" mt-6 py-4 px-8 text-lg bg-amber-500 hover:bg-amber-700 rounded-xl text-white"> Submit </button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
