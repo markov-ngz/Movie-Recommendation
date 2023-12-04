@@ -16,8 +16,4 @@ urlpatterns = [
     path('rec/',get_recommendations,name='get_rec'),
     path('rec/desc',get_recommendations_by_desc,name='get_rec_by_desc'),
     path('', home, name='home')
-    # path('new/',views.new, name='new'),
-    # path('<int:pk>/delete/', views.delete, name='delete'),
-    # path('<int:pk>/edit/', views.edit, name='edit'),
-    # path('', views.items, name='items')
 ]

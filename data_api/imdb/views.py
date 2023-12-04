@@ -9,27 +9,6 @@ from imdb.serializers import *
 from rest_framework import mixins
 from django.views import View
 
-#---EXERCICE-------------------------------------------------------------------------------------------------------------- 
-
-class MovieRequest(View):
-
-    permission_classes = [IsAuthenticated]
-
-    
-    def get(self, request, *args, **kwargs):
-        if request.method == 'GET' :
-            if 'date' in request.GET.keys():
-                movies = Movie.objects.filter(year=request.GET['date'])
-                serializer = MovieSerializer(movies, many=True)
-            elif 'title' in request.GET.keys():
-                movies = Movie.objects.filter(titre=request.GET['title'])
-                serializer = MovieSerializer(movies, many=True)
-            else:
-                return JsonResponse({"Errmessage":"query parameter do not object any of the object's fields"},safe=True, status=200)
-            
-            return JsonResponse(serializer.data, safe=False, status=200)
-        else : 
-            return JsonResponse({'message':'BAD HTTP METHOD'})
 
 #---CLASSICAL--------------------------------------------------------------------------------------------------------------
 
@@ -85,8 +64,28 @@ class GenreDetail(generics.RetrieveAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenresSerializer
 
-#---Exercice/Mandatory views-------------------------------------------------------------------------------------------
 
+#---EXERCICE/MANDATORY VIEWS-------------------------------------------------------------------------------------------------------------- 
+
+class MovieRequest(View):
+
+    permission_classes = [IsAuthenticated]
+
+    
+    def get(self, request, *args, **kwargs):
+        if request.method == 'GET' :
+            if 'date' in request.GET.keys():
+                movies = Movie.objects.filter(year=request.GET['date'])
+                serializer = MovieSerializer(movies, many=True)
+            elif 'title' in request.GET.keys():
+                movies = Movie.objects.filter(titre=request.GET['title'])
+                serializer = MovieSerializer(movies, many=True)
+            else:
+                return JsonResponse({"Errmessage":"query parameter do not object any of the object's fields"},safe=True, status=200)
+            
+            return JsonResponse(serializer.data, safe=False, status=200)
+        else : 
+            return JsonResponse({'message':'BAD HTTP METHOD'})
 
 
 

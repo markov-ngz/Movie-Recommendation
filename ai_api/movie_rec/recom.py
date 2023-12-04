@@ -27,18 +27,20 @@ def get_recommendations(title, cosine_sim, indices,df):
     """
     Fonction qui retourne les 10 films ayant la description la plus similaire à partir du title précisé
     """
+  
     if title not in indices.index :
       return ([0 for i in range(1,6)],["unknown_title" for i in range(1,6)],[-1 for i in range(1,6)])
     #Obtenir l'index du film qui correspond au titre à l'aide de la clé de titre des index.
     idx = indices[indices.index == title].values[0]
 
     # trier les films à partir des "similarity scores"
-
     order_matrix=  np.sort(cosine_sim[idx])[::-1]
 
+    # containers
     L = []
     similarities = []
 
+    
     for i in order_matrix[1:6]:
       similarities.append(i)
       index = np.where(cosine_sim[idx] == i)[0]

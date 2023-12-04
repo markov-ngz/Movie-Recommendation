@@ -15,14 +15,14 @@ from .recom import request_recommendation, parse_recommendation
 @require_http_methods(["GET"])
 def home(request):
 
-    # interisting ids 
+    # id for the home page
     ids = [32994, 38683, 37341,33907]
     movies = []
     for id_movie in ids:
         movie = Movie.objects.filter(id_movie=id_movie)
         movies.append(movie[0])
 
-    # interisting ids 
+    # actor for the home page 
     ids = [1357, 1183, 1803, 1442]
     actors = []
     for id_actor in ids:
@@ -41,6 +41,7 @@ def home(request):
 
 #---RECOMMENDATIONS---------------------------------------------------------------------------------------------------
 
+#---1. BY TITLE ---
 @csrf_protect
 @login_required(login_url='/login')
 @require_http_methods(["POST","GET"])
@@ -111,7 +112,7 @@ def get_recommendations(request):
 
     return render(request, "imdb/get_rec.html", {"form": form})
 
-
+#---2. BY DESC ---
 @csrf_protect
 @login_required(login_url='/login')
 @require_http_methods(["POST","GET"])
