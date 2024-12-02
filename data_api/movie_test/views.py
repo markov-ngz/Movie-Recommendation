@@ -28,8 +28,6 @@ class CreateUserView(generics.CreateAPIView):
         serializer = self.get_serializer(data=data_to_send)
         serializer.is_valid(raise_exception=True)
 
-        # Perform any additional logic before or after creating the user if needed
-
         # Call the create method of the serializer to create the user
         self.perform_create(serializer)
 
